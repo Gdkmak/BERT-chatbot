@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<title>Lorenzo</title>
+
+<head>
+  <link rel="shortcut icon" type="image/x-icon"
+    href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/joypixels/257/robot_1f916.png" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    h1 {
+      background-color: yellow;
+      display: inline-block;
+      font-size: 3em;
+      margin: 0;
+      padding: 14px;
+    }
+
+    h3 {
+      color: black;
+      font-size: 20px;
+      margin-top: 3px;
+      text-align: center;
+    }
+
+    #chatbox {
+      margin-left: auto;
+      margin-right: auto;
+      width: 80%;
+      margin-top: 60px;
+      border-bottom: 100% solid black;
+
+
+    }
+
+    #userInput {
+      margin-left: auto;
+      margin-right: auto;
+      border: 1px solid grey;
+      border-radius: 1px;
+      width: 60%;
+      margin-top: 100px;
+      height: 35px;
+    }
+
+    #textInput {
+      margin-top: 6px;
+      width: 90%;
+      border: none;
+      text-align: left;
+      font-family: sans-serif;
+      font-size: 17px;
+    }
+
+    .userText {
+      color: white;
+      font-family: sans-serif;
+      font-size: 17px;
+      text-align: right;
+      line-height: 30px;
+    }
+
+    .userText span {
+      background-color: navy;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .botText {
+      color: navy;
+      font-family: monospace;
+      font-size: 17px;
+      text-align: left;
+      line-height: 30px;
+    }
+
+    .botText span {
+      background-color: lightblue;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    #tidbit {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 300px;
+    }
+
+    .boxed {
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+      margin-top: 10px;
+      border: 1px solid grey;
+      border-radius: 20px;
+    }
+
+    .box {
+      border: 1px solid black;
+    }
+
+    .header {
+      background-color: black;
+      height: 100px;
+      position: relative;
+      text-align: center;
+    }
+
+    .headerText {
+      color: blanchedalmond;
+      font-size: 25px;
+      margin: 20px;
+      position: absolute;
+      top: 10%;
+      right: 20%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <p>
+      <span class="headerText"> Lorenzo is a chatbot developed using a pretrained Microsoft model DialoGPT </span>
+    </p>
+
+  </div>
+  <div class="box"></div>
+  <div class="boxed">
+    <div>
+      <div id="chatbox">
+        <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/joypixels/257/robot_1f916.png"
+          alt="Lorenzo" style="width:40px;height:40px;" id=circle />
+        <p class="botText">
+          <span>Hi there! I'm Lorenzo let's talk a bit!</span>
+        </p>
+      </div>
+      <div id="userInput">
+        <input id="textInput" type="text" name="msg" placeholder="Text Lorenzo" />
+      </div>
+    </div>
+    <script>
+      function getBotResponse() {
+        var rawText = $("#textInput").val();
+        var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
+        $("#textInput").val("");
+        $("#chatbox").append(userHtml);
+        document
+          .getElementById("userInput")
+          .scrollIntoView({ block: "start", behavior: "smooth" });
+        $.get("/get", { msg: rawText }).done(function (data) {
+          var botHtml = '<p class="botText"><span>' + data + "</span></p>";
+          $("#chatbox").append(botHtml);
+          document
+            .getElementById("userInput")
+            .scrollIntoView({ block: "start", behavior: "smooth" });
+        });
+      }
+      $("#textInput").keypress(function (e) {
+        if (e.which == 13) {
+          getBotResponse();
+        }
+      });
+    </script>
+
+  </div>
+</body>
+
+</html>
