@@ -1,4 +1,4 @@
-<img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/joypixels/257/robot_1f916.png" width="30" height="30">
+<img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/joypixels/257/robot_1f916.png" width="50" height="50">
 
 ***ChatBot Lorenzo*** 
 
